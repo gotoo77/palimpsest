@@ -232,3 +232,35 @@ Le prompt observe que la discipline documentaire de PALIMPSEST empeche les intui
 ### Extrait synthetique du prompt
 
 Le prompt demande une analyse d'impact de `H006` sur les protocoles existants, en particulier `E001`. Il pose que la vraie prochaine etape n'est peut-etre pas une revision de `E001`, mais une analyse des hypotheses implicites rendues incompletes par l'economie de l'attention.
+
+## P008 - Documenter la methode de recherche emergente
+
+- Date : 2026-07-18
+- Auteur ou origine : utilisateur, apres observation de la sequence `vision -> hypothese -> protocole -> revue -> hypothese -> impact -> decision de statut`
+- Contexte : `C003` introduit l'idee qu'un protocole peut rester valide dans un domaine de validite qualifie, et que les analyses d'impact forment une famille d'artefacts distincte.
+- Objectif : documenter la methode de recherche emergente sans l'extraire en nouveau projet ni en architecture.
+- Source archivee : `docs/research/prompts/P008-emergent-research-method.md`
+- Statut de source : texte source conserve depuis le contexte de session.
+- Rapport Codex : `docs/research/reports/RP007-emergent-research-method-report.md`
+- Artefacts d'entree :
+  - `C003` : `docs/research/H006-impact-on-E001.md`
+  - `D009` : double fil rouge recherche et jeu
+  - `docs/research/README.md`
+  - `docs/research/concept-evolution.md`
+- Artefacts produits ou attendus :
+  - `D010` : `docs/research/research-method.md`
+  - mises a jour de `docs/research/README.md`, `docs/research/concept-evolution.md`, `docs/research/artifact-provenance.md` et `docs/research/timeline.md`
+- Idees nouvelles apparues dans le prompt :
+  - L'implementation est une issue possible d'une chaine de raisonnement, pas le reflexe suivant une idee.
+  - Les protocoles ont un domaine de validite qualifie plutot qu'un statut simplement vrai ou faux.
+  - Les analyses de dependance epistemique constituent une famille d'artefacts distincte.
+  - La methode pourrait avoir une portee plus generale que PALIMPSEST.
+- Decisions explicitement non prises :
+  - aucun nouveau projet methodologique ;
+  - aucune automatisation ;
+  - aucune ontologie executable ;
+  - aucune implementation.
+
+### Extrait synthetique du prompt
+
+Le prompt observe que PALIMPSEST fait emerger une methode de recherche ou les idees passent par hypotheses, protocoles, revues et analyses d'impact avant implementation eventuelle. Il signale que cette methode pourrait devenir un patrimoine independant, sans demander de l'extraire maintenant.

@@ -58,6 +58,14 @@
 - Resultat : `H006` n'annule pas `E001`, mais rend incomplete son hypothese implicite `claim accessible -> claim consulte`.
 - Consequence : `E001` doit etre requalifie comme test sous politique de consultation triviale avant correction ; `E004` reste distinct pour tester directement l'economie de l'attention.
 
+### Methode de recherche emergente
+
+- Identifiant : `P008`, `D010`, `RP007`
+- Evenement : reconnaissance de la metadiscipline de PALIMPSEST comme methode de recherche potentiellement generale.
+- Artefacts concernes : `docs/research/prompts/P008-emergent-research-method.md`, `docs/research/research-method.md`, `docs/research/README.md`, `docs/research/concept-evolution.md`, `docs/research/artifact-provenance.md`, `docs/research/reports/RP007-emergent-research-method-report.md`.
+- Resultat : creation d'un document de methode decrivant la sequence vision -> hypothese -> protocole -> revue -> analyse d'impact -> decision de statut -> implementation eventuelle.
+- Consequence : la methode est surveillee comme patrimoine potentiel, mais aucun nouveau projet, framework, outil de graphe ou automatisation n'est lance.
+
 ## Entrees futures
 
 Ajouter seulement les etapes qui changent substantiellement la vision, le modele de domaine, le game design, l'architecture, une experience, une decision ou un document structurant.

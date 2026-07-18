@@ -41,6 +41,24 @@ La provenance documente une relation de transformation : quel prompt, document, 
 
 Une decision engage le projet. Aucune decision architecturale ou game design majeure ne doit etre inventee par ces fichiers. Les decisions formelles devront etre documentees separement, par exemple sous forme d'ADR, apres validation humaine.
 
+## Methode de recherche
+
+La methode de travail emergente est suivie dans `docs/research/research-method.md`.
+
+Principe courant :
+
+```text
+vision
+-> hypothese
+-> protocole experimental
+-> revue critique
+-> analyse d'impact si une hypothese nouvelle change le domaine de validite
+-> decision de statut
+-> implementation eventuelle
+```
+
+L'implementation doit rester une issue possible de la chaine de raisonnement, pas le reflexe suivant une idee. Cette methode peut avoir une portee au-dela de PALIMPSEST, mais elle ne constitue pas encore un projet autonome.
+
 ## Sources primaires et capitalisation
 
 Les prompts structurants et les rapports de run doivent etre conserves comme fichiers autonomes lorsque le texte est disponible.
@@ -70,6 +88,7 @@ Les identifiants initiaux suivent une convention simple :
 - `E001` : experience candidate ;
 - `O001` : observation ;
 - `A001` : architecture candidate ;
+- `D010` : document de methode ou de cadrage ;
 - `RP001` : rapport de run ou entree de catalogue de rapport ;
 - `ADR001` : decision acceptee, uniquement si elle est validee ulterieurement.
 

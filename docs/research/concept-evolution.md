@@ -113,7 +113,9 @@ Ce document initialise le suivi des concepts centraux de PALIMPSEST. Les definit
 
 - Formulation initiale : conserver les prompts, critiques, hypotheses, experiences, decisions futures et idees differees afin de ne pas transformer trop vite les intuitions en architecture.
 - Observation `P006` : la methode documentaire commence a agir comme un garde-fou du projet lui-meme. Les idees sont formulees, critiquees, reliees, retrodocumentees et conservees avant d'etre implementees.
-- Definition courante : culture de conception qui exige qu'une idee brillante devienne d'abord hypothese, experience candidate ou piste differee avant de devenir architecture.
+- Clarification `P008` : l'implementation devient une issue possible d'une chaine de raisonnement, pas le reflexe suivant une idee.
+- Definition courante : culture de conception qui exige qu'une idee brillante devienne d'abord hypothese, experience candidate, revue, analyse d'impact ou piste differee avant de devenir architecture.
 - Regle `C003` : chaque nouvelle hypothese importante doit demander quels protocoles existants deviennent incomplets si cette hypothese est vraie.
+- Cadrage `D010` : la methode est documentee comme potentiellement generale, mais ne doit pas etre extraite en projet autonome sans besoin ou friction documente.
 - Risque : la discipline peut produire un excellent objet de recherche sans jamais converger vers une experience jouable.
 - Questions ouvertes : quels seuils autorisent le passage d'une hypothese a une experience, puis d'une experience a une implementation ? Comment conserver la lenteur critique sans bloquer indefiniment le projet ?

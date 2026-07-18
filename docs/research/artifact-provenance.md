@@ -105,6 +105,17 @@ Les filiations ci-dessous representent uniquement les relations documentees lors
 - Transformation appliquee : demande d'analyse des hypotheses implicites de `E001` rendues incompletes par `H006`
 - Justification : eviter de corriger un protocole localement coherent sans examiner l'impact des hypotheses nouvelles.
 
+### P008 - Prompt sur la methode de recherche emergente
+
+- Chemin : `docs/research/prompts/P008-emergent-research-method.md`
+- Type : prompt
+- Statut : texte source conserve
+- Origine : utilisateur
+- Artefacts parents : `C003`, `D009`, `D002`, `D005`
+- Artefacts derives : `D010`, `RP007`
+- Transformation appliquee : formulation de la metadiscipline de PALIMPSEST comme methode de recherche potentiellement generale
+- Justification : reconnaitre la portee possible de la methode sans l'extraire prematurement en projet autonome.
+
 ### D002 - README de recherche
 
 - Chemin : `docs/research/README.md`
@@ -248,6 +259,17 @@ Les filiations ci-dessous representent uniquement les relations documentees lors
 - Transformation appliquee : synthese du verdict d'impact `H006 -> E001`
 - Justification : conserver la distinction entre prompt source, analyse d'impact et rapport du run.
 
+### RP007 - Rapport de run D010
+
+- Chemin : `docs/research/reports/RP007-emergent-research-method-report.md`
+- Type : rapport de run Codex
+- Statut : rapport de run redige pendant la session
+- Origine : `P008`
+- Artefacts parents : `P008`, `D010`
+- Artefacts derives : aucun documente
+- Transformation appliquee : synthese de la capitalisation methodologique
+- Justification : conserver la distinction entre prompt source, document de methode et rapport du run.
+
 ### E001 - Protocole de divergence minimale par acces a un Claim
 
 - Chemin : `docs/experiments/E001-minimal-claim-divergence.md`
@@ -314,6 +336,17 @@ Les filiations ci-dessous representent uniquement les relations documentees lors
 - Transformation appliquee : explicitation de la distinction entre laboratoire sur la memoire et jeu interessant pour le joueur
 - Justification : maintenir la question ludique visible pendant les travaux de recherche experimentale.
 
+### D010 - Methode de recherche emergente
+
+- Chemin : `docs/research/research-method.md`
+- Type : document de methode
+- Statut : cadrage methodologique, non decisionnel
+- Origine : `P008`
+- Artefacts parents : `P008`, `C003`, `D009`
+- Artefacts derives : aucun documente
+- Transformation appliquee : formalisation de la sequence vision -> hypothese -> protocole -> revue -> analyse d'impact -> decision de statut -> implementation eventuelle
+- Justification : preserver la methode emergente sans la transformer en framework autonome.
+
 ## Graphe documente
 
 ```mermaid
@@ -326,6 +359,7 @@ graph TD
     P005[Prompt attention]
     P006[Prompt recherche jeu]
     P007[Prompt impact H006]
+    P008[Prompt methode]
     C001[Revue critique]
     C002[Revue critique E001]
     C003[Impact H006 sur E001]
@@ -337,12 +371,14 @@ graph TD
     D007[Idees differees]
     D008[Convention sources]
     D009[Double fil rouge]
+    D010[Methode recherche]
     RP001[Rapport C001]
     RP002[Rapport run E001]
     RP003[Rapport run C002]
     RP004[Rapport run H006]
     RP005[Rapport run P006]
     RP006[Rapport run C003]
+    RP007[Rapport run D010]
     H001[Hypothese artefact-influence]
     H003[Hypothese ludique]
     H006[Hypothese attention]
@@ -374,6 +410,10 @@ graph TD
     C002 --> P007
     P007 --> C003
     C003 --> RP006
+    C003 --> P008
+    D009 --> P008
+    P008 --> D010
+    P008 --> RP007
     P001 --> D002
     P001 --> D003
     P001 --> D004
