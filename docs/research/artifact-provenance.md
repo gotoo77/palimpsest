@@ -94,6 +94,17 @@ Les filiations ci-dessous representent uniquement les relations documentees lors
 - Transformation appliquee : formulation d'un garde-fou distinguant question scientifique, question ludique et discipline de conception
 - Justification : eviter qu'un bon objet de recherche soit confondu avec un jeu interessant, et proteger la maturation des idees avant architecture.
 
+### P007 - Prompt d'analyse d'impact H006 sur E001
+
+- Chemin : `docs/research/prompts/P007-H006-impact-on-E001.md`
+- Type : prompt
+- Statut : texte source conserve
+- Origine : utilisateur
+- Artefacts parents : `H006`, `E001`, `C002`, `E004`
+- Artefacts derives : `C003`, `RP006`
+- Transformation appliquee : demande d'analyse des hypotheses implicites de `E001` rendues incompletes par `H006`
+- Justification : eviter de corriger un protocole localement coherent sans examiner l'impact des hypotheses nouvelles.
+
 ### D002 - README de recherche
 
 - Chemin : `docs/research/README.md`
@@ -226,14 +237,25 @@ Les filiations ci-dessous representent uniquement les relations documentees lors
 - Transformation appliquee : synthese du cadrage recherche/jeu et de la discipline de conception
 - Justification : conserver la distinction entre prompt source, garde-fou capitalise et rapport du run.
 
+### RP006 - Rapport de run C003
+
+- Chemin : `docs/research/reports/RP006-H006-impact-on-E001-report.md`
+- Type : rapport de run Codex
+- Statut : rapport de run redige pendant la session
+- Origine : `P007`
+- Artefacts parents : `P007`, `C003`
+- Artefacts derives : aucun documente
+- Transformation appliquee : synthese du verdict d'impact `H006 -> E001`
+- Justification : conserver la distinction entre prompt source, analyse d'impact et rapport du run.
+
 ### E001 - Protocole de divergence minimale par acces a un Claim
 
 - Chemin : `docs/experiments/E001-minimal-claim-divergence.md`
 - Type : protocole experimental conceptuel
-- Statut : formalise, revu par `C002`, corrections requises avant implementation
+- Statut : formalise, revu par `C002`, requalifie par `C003`, corrections et clarification de portee requises avant implementation
 - Origine : `P002`, a partir de la recommandation `C001`
 - Artefacts parents : `P002`, `C001`, `H001`
-- Artefacts derives : `C002`
+- Artefacts derives : `C002`, `C003`
 - Transformation appliquee : specification d'un protocole A/B minimal ou la seule difference intentionnelle est l'accessibilite d'un `Claim`
 - Justification : tester honnetement si un artefact consulte peut modifier une decision future de maniere lisible.
 
@@ -247,6 +269,17 @@ Les filiations ci-dessous representent uniquement les relations documentees lors
 - Artefacts derives : aucun documente
 - Transformation appliquee : identification des risques de faux positif, de scenario encode, de confusion accessibilite-consultation-applicabilite et des conditions avant implementation
 - Justification : eviter que la premiere implementation fige un protocole trop favorable a `H001`.
+
+### C003 - Analyse d'impact de H006 sur E001
+
+- Chemin : `docs/research/H006-impact-on-E001.md`
+- Type : analyse d'impact de protocole
+- Statut : analyse non decisionnelle
+- Origine : Codex, a partir de `P007`, `H006`, `E001` et `C002`
+- Artefacts parents : `P007`, `H006`, `E001`, `C002`
+- Artefacts derives : aucun documente
+- Transformation appliquee : identification des hypotheses implicites de `E001` rendues incompletes par `H006`
+- Justification : determiner si `E001` reste valide, doit etre amende ou doit etre remplace avant toute revision.
 
 ### H006 - Hypothese sur l'economie de l'attention
 
@@ -292,8 +325,10 @@ graph TD
     P004[Prompt sources primaires]
     P005[Prompt attention]
     P006[Prompt recherche jeu]
+    P007[Prompt impact H006]
     C001[Revue critique]
     C002[Revue critique E001]
+    C003[Impact H006 sur E001]
     D002[README recherche]
     D003[Chronologie]
     D004[Historique des prompts]
@@ -307,6 +342,7 @@ graph TD
     RP003[Rapport run C002]
     RP004[Rapport run H006]
     RP005[Rapport run P006]
+    RP006[Rapport run C003]
     H001[Hypothese artefact-influence]
     H003[Hypothese ludique]
     H006[Hypothese attention]
@@ -333,6 +369,11 @@ graph TD
     H003 --> P006
     P006 --> D009
     P006 --> RP005
+    H006 --> P007
+    E001 --> P007
+    C002 --> P007
+    P007 --> C003
+    C003 --> RP006
     P001 --> D002
     P001 --> D003
     P001 --> D004

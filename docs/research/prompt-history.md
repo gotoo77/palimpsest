@@ -200,3 +200,35 @@ Le prompt identifie une question fondatrice : pourquoi une entite consulte-t-ell
 ### Extrait synthetique du prompt
 
 Le prompt observe que la discipline documentaire de PALIMPSEST empeche les intuitions de devenir trop vite architecture. Il propose de proteger deux fils rouges : la question scientifique de l'influence d'une memoire persistante sur un systeme, et la question ludique de l'interet pour le joueur.
+
+## P007 - Analyser l'impact de H006 sur E001
+
+- Date : 2026-07-18
+- Auteur ou origine : utilisateur, apres remise en question de la prochaine tranche "E001 corrigee"
+- Contexte : `H006` affirme qu'une memoire accessible n'est pas encore une memoire consultee. Cette hypothese peut rendre incompletes certaines hypotheses implicites de `E001`.
+- Objectif : determiner si `E001` peut etre amende, doit etre remplace, ou reste valide en l'etat malgre `H006`.
+- Source archivee : `docs/research/prompts/P007-H006-impact-on-E001.md`
+- Statut de source : texte source conserve depuis le contexte de session.
+- Rapport Codex : `docs/research/reports/RP006-H006-impact-on-E001-report.md`
+- Artefacts d'entree :
+  - `E001` : `docs/experiments/E001-minimal-claim-divergence.md`
+  - `C002` : `docs/research/E001-critical-review.md`
+  - `H006` : hypothese sur l'economie de l'attention
+  - `E004` : experience candidate de politique de consultation
+- Artefacts produits ou attendus :
+  - `C003` : `docs/research/H006-impact-on-E001.md`
+  - mises a jour de `docs/research/open-hypotheses.md`, `docs/research/concept-evolution.md`, `docs/research/artifact-provenance.md` et `docs/research/timeline.md`
+- Idees nouvelles apparues dans le prompt :
+  - Une hypothese nouvelle peut rendre un protocole existant incomplet sans le rendre faux.
+  - `E001` a ete concu avec l'hypothese implicite `Claim accessible -> Claim consulte`.
+  - Avant de corriger un protocole, il faut analyser si une hypothese recente change sa nature.
+  - La chaine attentionnelle ajoute des points d'echec entre accessibilite et decision.
+- Decisions explicitement non prises :
+  - aucune correction directe de `E001` ;
+  - aucune formalisation de `E004` ;
+  - aucune implementation ;
+  - aucune decision d'architecture.
+
+### Extrait synthetique du prompt
+
+Le prompt demande une analyse d'impact de `H006` sur les protocoles existants, en particulier `E001`. Il pose que la vraie prochaine etape n'est peut-etre pas une revision de `E001`, mais une analyse des hypotheses implicites rendues incompletes par l'economie de l'attention.

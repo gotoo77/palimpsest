@@ -70,6 +70,7 @@ Ce document initialise le suivi des concepts centraux de PALIMPSEST. Les definit
 - Critiques recues : `C002` signale que consultation et accessibilite sont trop proches dans `E001`. `P005` formule le risque plus largement : consulter tous les artefacts accessibles transforme la memoire en information totale toujours prise en compte.
 - Reformulation de travail : la consultation devrait peut-etre etre precedee par une recherche et une selection. La recherche identifie les artefacts susceptibles d'aider une decision ; la selection choisit ceux qui seront effectivement consultes ; la consultation rend leur contenu disponible a l'interpretation.
 - Definition courante : ensemble de processus attentionnels possibles entre memoire accessible et interpretation, encore non valide comme mecanisme necessaire.
+- Clarification `C003` : si l'attention est neutralisee, le protocole doit le dire. Sinon, accessibilite, recherche, selection, consultation et applicabilite doivent etre tracees comme etapes distinctes.
 - Hypothese liee : `H006`.
 - Questions ouvertes : une politique deterministe simple suffit-elle ? Faut-il modeler confiance, cout de recherche, ordre de consultation, fatigue, priorite d'auteur ou erreur ? Comment eviter de remplacer la memoire par une IA de scoring classique ?
 
@@ -113,5 +114,6 @@ Ce document initialise le suivi des concepts centraux de PALIMPSEST. Les definit
 - Formulation initiale : conserver les prompts, critiques, hypotheses, experiences, decisions futures et idees differees afin de ne pas transformer trop vite les intuitions en architecture.
 - Observation `P006` : la methode documentaire commence a agir comme un garde-fou du projet lui-meme. Les idees sont formulees, critiquees, reliees, retrodocumentees et conservees avant d'etre implementees.
 - Definition courante : culture de conception qui exige qu'une idee brillante devienne d'abord hypothese, experience candidate ou piste differee avant de devenir architecture.
+- Regle `C003` : chaque nouvelle hypothese importante doit demander quels protocoles existants deviennent incomplets si cette hypothese est vraie.
 - Risque : la discipline peut produire un excellent objet de recherche sans jamais converger vers une experience jouable.
 - Questions ouvertes : quels seuils autorisent le passage d'une hypothese a une experience, puis d'une experience a une implementation ? Comment conserver la lenteur critique sans bloquer indefiniment le projet ?

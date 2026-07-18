@@ -50,6 +50,14 @@
 - Resultat : ajout d'un garde-fou documentaire distinguant question scientifique et question ludique.
 - Consequence : les futures experiences doivent eviter de confondre validite de recherche et interet joueur ; aucune architecture ni implementation n'est autorisee par ce cadrage.
 
+### Analyse d'impact de H006 sur E001
+
+- Identifiant : `P007`, `C003`, `RP006`
+- Evenement : remise en question de la prochaine tranche "E001 corrigee" au profit d'une analyse d'impact de `H006`.
+- Artefacts concernes : `docs/research/prompts/P007-H006-impact-on-E001.md`, `docs/research/H006-impact-on-E001.md`, `docs/research/open-hypotheses.md`, `docs/research/concept-evolution.md`, `docs/research/artifact-provenance.md`, `docs/research/reports/RP006-H006-impact-on-E001-report.md`.
+- Resultat : `H006` n'annule pas `E001`, mais rend incomplete son hypothese implicite `claim accessible -> claim consulte`.
+- Consequence : `E001` doit etre requalifie comme test sous politique de consultation triviale avant correction ; `E004` reste distinct pour tester directement l'economie de l'attention.
+
 ## Entrees futures
 
 Ajouter seulement les etapes qui changent substantiellement la vision, le modele de domaine, le game design, l'architecture, une experience, une decision ou un document structurant.

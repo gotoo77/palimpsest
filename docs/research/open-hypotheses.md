@@ -7,7 +7,7 @@
 - Experience candidate : `E001`, deux runs identiques sauf acces a un `Claim` sur une entite qui a pris une ressource.
 - Criteres susceptibles de renforcer l'hypothese : une entite refuse ou accepte une interaction differemment, et la trace reference explicitement l'artefact consulte.
 - Criteres susceptibles de l'affaiblir : le joueur ne peut pas distinguer l'influence de l'artefact d'un hasard ou d'une regle cachee.
-- Statut actuel : protocole `E001` formalise et revu par `C002`; corrections requises avant implementation, non teste.
+- Statut actuel : protocole `E001` formalise, revu par `C002`, puis requalifie par l'analyse d'impact `C003`; corrections et clarification de portee requises avant implementation, non teste.
 
 ## H002 - Trois types d'artefacts suffisent pour tester la boucle centrale
 
@@ -55,6 +55,7 @@
 - Criteres susceptibles de renforcer l'hypothese : des politiques de consultation differentes produisent des decisions divergentes, des traces causales lisibles et des trajectoires reproductibles sans changer les artefacts disponibles.
 - Criteres susceptibles de l'affaiblir : une consultation triviale de tous les artefacts accessibles produit deja des comportements aussi lisibles, interessants et suffisants que des politiques d'attention plus riches.
 - Resultats inconclusifs possibles : la divergence apparait mais reste illisible ; les politiques de consultation se reduisent a des scores caches ; la variation observee vient d'un artefact ou d'une regle de decision plutot que de la politique d'attention.
+- Impact documente : `C003`, `docs/research/H006-impact-on-E001.md`, conclut que `H006` rend incompletes certaines hypotheses implicites de `E001` sans l'annuler.
 - Statut actuel : hypothese de recherche nouvelle, non testee, aucune decision d'architecture.
 
 ## Experiences candidates
@@ -64,12 +65,14 @@
 - Hypothese cible : `H001`
 - Document : `docs/experiments/E001-minimal-claim-divergence.md`
 - Revue critique : `C002`, `docs/research/E001-critical-review.md`
-- Statut : protocole conceptuel formalise le 2026-07-18, non autorise pour implementation avant corrections.
+- Analyse d'impact : `C003`, `docs/research/H006-impact-on-E001.md`
+- Statut : protocole conceptuel formalise le 2026-07-18, non autorise pour implementation avant corrections et requalification sous politique de consultation triviale.
 - Configuration : deux simulations avec meme seed, memes entites, memes ressources, meme evenement anterieur et memes regles.
 - Variable changee : dans une branche, `claim-001` est accessible a `Ada` ; dans l'autre, il existe mais reste masque ou inaccessible pour `Ada`.
 - Observation attendue : `Ada` choisit differemment face a une demande de cooperation de `Borin`, et la trace indique accessibilite, consultation, interpretation, decision et references causales.
 - Limite : cette experience ne prouve pas l'emergence ; elle teste seulement la causalite memoire -> decision.
-- Corrections requises avant implementation : retirer la force pre-cablee du claim, separer accessibilite/consultation/applicabilite, expliciter la raison par defaut de Run B, definir une trace atomique et ajouter des controles negatifs.
+- Requalification requise : `E001` doit etre lu comme un test de `H001` sous attention neutralisee, pas comme un test de l'economie de l'attention.
+- Corrections requises avant implementation : retirer la force pre-cablee du claim, separer accessibilite/recherche/selection/consultation/applicabilite, expliciter la raison par defaut de Run B, definir une trace atomique et ajouter des controles negatifs.
 
 ### E002 - Chaine EventRecord -> Claim -> Norm
 
@@ -94,4 +97,4 @@
 - Configuration : plusieurs runs avec memes entites, memes evenements, memes `EventRecord`, memes `Claim`, memes regles de decision et meme seed.
 - Variable changee : politique de recherche, selection ou consultation des artefacts.
 - Observation attendue : deux entites ou deux societes possedant la meme memoire disponible prennent des decisions differentes parce qu'elles ne consultent pas les memes artefacts, ou ne les consultent pas dans le meme ordre.
-- Limite : cette experience ne doit pas etre formalisee avant correction de `E001`, sauf comme question de cadrage.
+- Limite : cette experience ne doit pas remplacer `E001`; elle doit tester directement `H006` apres clarification de la portee de `E001`.
