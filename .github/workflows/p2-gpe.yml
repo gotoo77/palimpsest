@@ -1,0 +1,33 @@
+name: P2 GPE Native
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  p2-native:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install native GPE dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libasound2-dev libudev-dev pkg-config
+      - name: Install Rust
+        run: rustup toolchain install 1.97.1 --profile minimal --component rustfmt --component clippy
+      - name: Format
+        run: cargo fmt --manifest-path p2/Cargo.toml -- --check
+      - name: Check
+        run: cargo check --manifest-path p2/Cargo.toml --locked
+      - name: Tests
+        run: cargo test --manifest-path p2/Cargo.toml --locked
+      - name: Clippy
+        run: cargo clippy --manifest-path p2/Cargo.toml --locked --all-targets -- -D warnings
+      - name: Diff
+        run: git diff --check
