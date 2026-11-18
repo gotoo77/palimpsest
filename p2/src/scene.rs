@@ -64,7 +64,6 @@ impl Scene {
     pub fn predicted_correctly(&self) -> Option<bool> {
         Some(self.prediction? == self.result.as_ref()?.chosen_action)
     }
-
 }
 
 #[cfg(test)]
