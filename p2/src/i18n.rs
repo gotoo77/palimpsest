@@ -138,12 +138,11 @@ mod tests {
         let font = TextRenderer::default();
         for lang in [Language::French, Language::English] {
             let text = lang.copy();
-            for value in [
-                text.ada_role,
-                text.borin_role,
-                text.ciro_role,
-            ] {
-                assert!(font.text_size(value, 1).0 <= 119, "role label too long: {value}");
+            for value in [text.ada_role, text.borin_role, text.ciro_role] {
+                assert!(
+                    font.text_size(value, 1).0 <= 119,
+                    "role label too long: {value}"
+                );
             }
             for value in [
                 text.record_title,
@@ -158,7 +157,10 @@ mod tests {
                 text.access_visible,
                 text.access_masked,
             ] {
-                assert!(font.text_size(value, 1).0 <= 272, "panel label too long: {value}");
+                assert!(
+                    font.text_size(value, 1).0 <= 272,
+                    "panel label too long: {value}"
+                );
             }
             for value in [
                 text.subtitle,
@@ -172,7 +174,10 @@ mod tests {
                 text.footer_before,
                 text.footer_after,
             ] {
-                assert!(font.text_size(value, 1).0 <= 582, "screen label too long: {value}");
+                assert!(
+                    font.text_size(value, 1).0 <= 582,
+                    "screen label too long: {value}"
+                );
             }
             assert!(font.text_size(text.result_refuse, 1).0 < 150);
             assert!(font.text_size(text.result_help, 1).0 < 150);
