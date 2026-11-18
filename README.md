@@ -2,7 +2,7 @@
 
 Laboratoire experimental sur la memoire persistante, la consultation de traces et leur influence sur des decisions futures.
 
-**Etat :** P0 documentaire fusionnee ; P1, micro-simulation E001 en proposition (pas un jeu GPE, pas une simulation sociale complete).
+**Etat au 2026-11-18 :** P0 documentaire fusionnee ; P1, micro-simulation E001 implementee sur branche de PR et validee par la CI GitHub (12 tests, formatage, compilation, Clippy et CLI). Ce n'est pas un jeu GPE ni une simulation sociale complete.
 
 ## Experience E001
 
