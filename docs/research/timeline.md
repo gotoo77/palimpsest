@@ -66,6 +66,16 @@
 - Resultat : creation d'un document de methode decrivant la sequence vision -> hypothese -> protocole -> revue -> analyse d'impact -> decision de statut -> implementation eventuelle.
 - Consequence : la methode est surveillee comme patrimoine potentiel, mais aucun nouveau projet, framework, outil de graphe ou automatisation n'est lance.
 
+## 2026-11-18
+
+### Revision documentaire P0 de E001 via GitHub
+
+- Identifiants : `P009` (mandat), `RP008` (revue).
+- Origine : reprise acceptee par l'utilisateur, avec instruction explicite de travailler directement dans le depot GitHub.
+- Artefacts concernes : E001, hypotheses ouvertes, chronologie, provenance, P009 et RP008.
+- Resultat : corrections documentaires proposees dans une branche et une PR, sans implementation ni preuve experimentale.
+- Consequence : gate humaine P0 encore ouverte ; H006/E004 restent distinctes ; aucune architecture GPE/Rust validee.
+
 ## Entrees futures
 
 Ajouter seulement les etapes qui changent substantiellement la vision, le modele de domaine, le game design, l'architecture, une experience, une decision ou un document structurant.

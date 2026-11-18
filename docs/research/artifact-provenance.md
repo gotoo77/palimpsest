@@ -424,3 +424,22 @@ graph TD
     C001 --> H003
     H001 --> E001
 ```
+
+### P009 - Reprise documentaire E001
+
+- Chemin : `docs/research/prompts/P009-E001-P0-revision.md`
+- Type : mandat et cadrage d'execution ; accord utilisateur distingue de sa reformulation technique.
+- Statut : accord pour proposer des changements dans GitHub, sans fusion ni implementation.
+- Origine : utilisateur, 2026-11-18.
+- Artefacts parents : `E001`, `C002`, `C003`, `H001`, `H006`.
+- Artefacts derives : amendement E001, revue `RP008`.
+- Transformation appliquee : requalification et corrections documentaires avant P1.
+
+### RP008 - Revue P0 du protocole revise
+
+- Chemin : `docs/research/reports/RP008-E001-P0-review.md`
+- Type : revue documentaire preliminaire, pas resultat de simulation.
+- Statut : avis de preparation ; revue humaine de gate encore attendue.
+- Artefacts parents : `P009`, `E001`, `C002`, `C003`.
+- Artefacts derives : aucun avant verdict humain P0.
+- Transformation appliquee : bilan des corrections, risques residuels et conditions de la suite.
