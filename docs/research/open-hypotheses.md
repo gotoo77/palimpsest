@@ -7,7 +7,7 @@
 - Experience candidate : `E001`, deux runs identiques sauf acces a un `Claim` sur une entite qui a pris une ressource.
 - Criteres susceptibles de renforcer l'hypothese : une entite refuse ou accepte une interaction differemment, et la trace reference explicitement l'artefact consulte.
 - Criteres susceptibles de l'affaiblir : le joueur ne peut pas distinguer l'influence de l'artefact d'un hasard ou d'une regle cachee.
-- Statut actuel : protocole `E001` formalise, revu par `C002`, puis requalifie par l'analyse d'impact `C003`; corrections et clarification de portee requises avant implementation, non teste.
+- Statut actuel : E001 amende documentairement le 2026-11-18 sous politique de consultation triviale ; revue de gate humaine requise avant une implementation, non teste.
 
 ## H002 - Trois types d'artefacts suffisent pour tester la boucle centrale
 
@@ -66,13 +66,13 @@
 - Document : `docs/experiments/E001-minimal-claim-divergence.md`
 - Revue critique : `C002`, `docs/research/E001-critical-review.md`
 - Analyse d'impact : `C003`, `docs/research/H006-impact-on-E001.md`
-- Statut : protocole conceptuel formalise le 2026-07-18, non autorise pour implementation avant corrections et requalification sous politique de consultation triviale.
+- Statut : protocole conceptuel initial du 2026-07-18 ; amendement P0 propose le 2026-11-18, non implemente et non teste ; gate de validation humaine toujours ouverte.
 - Configuration : deux simulations avec meme seed, memes entites, memes ressources, meme evenement anterieur et memes regles.
 - Variable changee : dans une branche, `claim-001` est accessible a `Ada` ; dans l'autre, il existe mais reste masque ou inaccessible pour `Ada`.
 - Observation attendue : `Ada` choisit differemment face a une demande de cooperation de `Borin`, et la trace indique accessibilite, consultation, interpretation, decision et references causales.
 - Limite : cette experience ne prouve pas l'emergence ; elle teste seulement la causalite memoire -> decision.
-- Requalification requise : `E001` doit etre lu comme un test de `H001` sous attention neutralisee, pas comme un test de l'economie de l'attention.
-- Corrections requises avant implementation : retirer la force pre-cablee du claim, separer accessibilite/recherche/selection/consultation/applicabilite, expliciter la raison par defaut de Run B, definir une trace atomique et ajouter des controles negatifs.
+- Requalification explicite : E001 teste H001 sous `consult_all_accessible_claims`, et ne teste pas H006 ; la portee semantique ne determine pas l'acces.
+- Corrections documentaires P0 : aucune force decisionnelle embarquee dans le Claim, raison positive de cooperation, etapes causales separees, trace atomique, quatre controles negatifs et permutations d'identifiants. Revue independante encore requise avant P1.
 
 ### E002 - Chaine EventRecord -> Claim -> Norm
 
