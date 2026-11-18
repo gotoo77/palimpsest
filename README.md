@@ -26,6 +26,18 @@ Le programme affiche la comparaison A/B et les traces structurees en format de d
 
 Les tests verifient l'influence causale, la consultation, la reproductibilite, quatre controles negatifs, la permutation des identifiants, la provenance structurelle et la difference entre alleguer et prouver.
 
+## Experience E005 : Le pont (exploration ludique H003)
+
+**Proposition sur branche d'experimentation**, sans integration GPE. Ada dispose d'un seul creneau de travail pour deux demandes successives : aider Borin a reparer un pont, puis aider Ciro a renforcer un abri. Les intentions proviennent de la fonction E001 ; la disponibilite du creneau limite l'execution.
+
+```sh
+cargo run --locked -- bridge
+cargo run --locked -- bridge visible
+cargo run --locked -- bridge masque
+```
+
+Cette experience ne demontre pas que Palimpsest est amusant : elle cherche seulement si une contrainte finie cree un premier arbitrage. Les limites et le protocole sont documentes dans [E005](docs/experiments/E005-bridge-two-requests.md).
+
 ## Sources et limites
 
 - [Protocole E001](docs/experiments/E001-minimal-claim-divergence.md)
