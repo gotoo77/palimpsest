@@ -1,7 +1,7 @@
 //! E005: two competing requests for one remaining work shift.
 //! This is a headless game-design probe, not a new E001 rule or a social engine.
 
-use palimpsest::{Action, DecisionTrace, ExperimentError, World, decide, fixture};
+use palimpsest::{decide, fixture, Action, DecisionTrace, ExperimentError, World};
 
 /// An existing Claim may be consulted for both requests; it only applies to
 /// the partner actually named in the Claim.
@@ -22,7 +22,9 @@ pub fn run_with_world(world: &World, claim_visible: bool) -> Result<BridgeTrial,
     let mut first_world = world.clone();
     let actor = first_world.decision.actor.clone();
     if claim_visible {
-        first_world.claim_hidden_from.retain(|entity| entity != &actor);
+        first_world
+            .claim_hidden_from
+            .retain(|entity| entity != &actor);
     } else if !first_world.claim_hidden_from.contains(&actor) {
         first_world.claim_hidden_from.push(actor);
     }
@@ -40,8 +42,7 @@ pub fn run_with_world(world: &World, claim_visible: bool) -> Result<BridgeTrial,
         free_shifts -= 1;
     }
 
-    let shelter_reinforced =
-        ciro_decision.chosen_action == Action::Cooperate && free_shifts > 0;
+    let shelter_reinforced = ciro_decision.chosen_action == Action::Cooperate && free_shifts > 0;
     if shelter_reinforced {
         free_shifts -= 1;
     }
@@ -63,17 +64,19 @@ pub fn run(claim_visible: bool) -> Result<BridgeTrial, ExperimentError> {
 pub fn print_trial(trial: &BridgeTrial) {
     println!(
         "Acces d'Ada a l'accusation de Ciro : {}",
-        if trial.claim_visible { "autorise" } else { "masque" }
+        if trial.claim_visible {
+            "autorise"
+        } else {
+            "masque"
+        }
     );
     println!(
         "Decision 1 (demande de Borin) : {:?}, artefacts consultes : {:?}",
-        trial.borin_decision.chosen_action,
-        trial.borin_decision.consulted_artifact_ids
+        trial.borin_decision.chosen_action, trial.borin_decision.consulted_artifact_ids
     );
     println!(
         "Decision 2 (demande de Ciro) : {:?}, artefacts consultes : {:?}",
-        trial.ciro_decision.chosen_action,
-        trial.ciro_decision.consulted_artifact_ids
+        trial.ciro_decision.chosen_action, trial.ciro_decision.consulted_artifact_ids
     );
     if trial.ciro_decision.chosen_action == Action::Cooperate && !trial.shelter_reinforced {
         println!("Ada voudrait aider Ciro, mais son unique creneau est deja utilise.");
@@ -87,7 +90,7 @@ pub fn print_trial(trial: &BridgeTrial) {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use palimpsest::{ReasonKind, fixture};
+    use palimpsest::{fixture, ReasonKind};
 
     #[test]
     fn accessible_claim_preserves_shift_for_shelter() {

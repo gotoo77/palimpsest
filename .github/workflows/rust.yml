@@ -27,3 +27,5 @@ jobs:
         run: cargo clippy --locked --all-targets -- -D warnings
       - name: Experiment CLI
         run: cargo run --locked -- compare
+      - name: Bridge probe CLI
+        run: cargo run --locked -- bridge
