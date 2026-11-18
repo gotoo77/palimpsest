@@ -26,7 +26,7 @@
 - Criteres susceptibles de renforcer l'hypothese : le joueur formule des hypotheses, observe des surprises comprehensibles et ajuste ses interventions.
 - Criteres susceptibles de l'affaiblir : l'experience ressemble a du debogage de simulation, les effets sont trop opaques, ou le dispositif devient un bon laboratoire sans produire d'activite interessante pour le joueur.
 - Garde-fou `P006` : la question scientifique "comment une memoire persistante influence-t-elle un systeme ?" ne repond pas automatiquement a la question ludique "pourquoi est-ce interessant pour le joueur ?".
-- Statut actuel : hypothese ouverte, non testee, a maintenir en parallele des hypotheses de recherche systemique.
+- Statut actuel : **REVISE** apres le playtest visuel de P2 (18 novembre 2026) : retour utilisateur explicite « outil de demonstration plutot que jeu ». Nouvelle experience E005 proposee pour tester deux besoins concurrents avec un creneau de travail unique ; resultat ludique encore inconnu.
 
 ## H004 - L'oubli par baisse d'influence est plus utile au prototype que la suppression
 
@@ -98,3 +98,11 @@
 - Variable changee : politique de recherche, selection ou consultation des artefacts.
 - Observation attendue : deux entites ou deux societes possedant la meme memoire disponible prennent des decisions differentes parce qu'elles ne consultent pas les memes artefacts, ou ne les consultent pas dans le meme ordre.
 - Limite : cette experience ne doit pas remplacer `E001`; elle doit tester directement `H006` apres clarification de la portee de `E001`.
+
+### E005 - Le pont, arbitrage entre deux demandes
+
+- Hypothese cible : `H003` (interet ludique), pas `H006`.
+- Document : `docs/experiments/E005-bridge-two-requests.md`.
+- Statut : prototype headless propose, test humain non realise.
+- Principe : meme memoire et deux demandes, mais un seul creneau de travail ; comparer les consequences sous les deux accessibilites du Claim.
+- Risque : le choix peut rester un booleen predictible ; un resultat different ne suffit pas a confirmer le gameplay.

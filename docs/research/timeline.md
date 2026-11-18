@@ -76,6 +76,14 @@
 - Resultat : corrections documentaires proposees dans une branche et une PR, sans implementation ni preuve experimentale.
 - Consequence : gate humaine P0 encore ouverte ; H006/E004 restent distinctes ; aucune architecture GPE/Rust validee.
 
+### E005 - Revue du gameplay apres le premier essai P2
+
+- Source primaire : `P010` (retour utilisateur et acceptation de la suite), issue GitHub #3.
+- Observation : la scene P2 fonctionne visuellement mais demeure ressentie comme un outil de demonstration ; **H003 non validee, REVISE**.
+- Proposition : `E005`, deux demandes successives pour un seul creneau de travail d'Ada, meme Claim E001 et deux consequences concurrentes.
+- Implementation candidate : prototype Rust headless sous PR dediee, sans changer le noyau E001 ni GPE.
+- Limite : la preuve technique et le verdict de gameplay restent separes ; pas de validation humaine de E005.
+
 ## Entrees futures
 
 Ajouter seulement les etapes qui changent substantiellement la vision, le modele de domaine, le game design, l'architecture, une experience, une decision ou un document structurant.

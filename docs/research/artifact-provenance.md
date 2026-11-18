@@ -443,3 +443,21 @@ graph TD
 - Artefacts parents : `P009`, `E001`, `C002`, `C003`.
 - Artefacts derives : aucun avant verdict humain P0.
 - Transformation appliquee : bilan des corrections, risques residuels et conditions de la suite.
+
+### P010 - Mandat de reprise ludique
+
+- Chemin : `docs/research/prompts/P010-H003-gameplay-revision.md`
+- Statut : source utilisateur conservee par extraits exacts ; interpretation de l'assistant marquee comme telle.
+- Origine : retour utilisateur sur P2, 2026-11-18.
+- Parents : `H003`, `E001`, issue #3, PR #4.
+- Derives : `E005`.
+- Transformation : requalifier l'outil de demonstration en question falsifiable de gameplay, sans supposer l'emergence.
+
+### E005 - Prototype de deux demandes concurrentes
+
+- Chemin : `docs/experiments/E005-bridge-two-requests.md`
+- Statut : experience exploratoire H003, headless, non validee ludiquement.
+- Origine : proposition assistant acceptee dans le fil, sous mandat `P010`.
+- Parents : `P010`, `H003`, `E001`.
+- Derives : `src/bridge.rs` et la commande CLI `bridge` (propositions de PR).
+- Transformation : ajouter une contrainte de creneau a deux intentions issues de la meme regle E001, sans ajouter de moteur social.
