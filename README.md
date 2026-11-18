@@ -26,6 +26,16 @@ Le programme affiche la comparaison A/B et les traces structurees en format de d
 
 Les tests verifient l'influence causale, la consultation, la reproductibilite, quatre controles negatifs, la permutation des identifiants, la provenance structurelle et la difference entre alleguer et prouver.
 
+## Prototype P2 (GPE natif)
+
+Une scène interactive expérimentale est disponible dans [p2/](p2/README.md) : afficher l'histoire, inspecter un Claim, masquer ou autoriser son accès à Ada, prédire puis révéler sa décision réelle.
+
+```sh
+cargo run --manifest-path p2/Cargo.toml --locked
+```
+
+Ceci reste **une proposition de prototype H003**, pas une preuve de qualité ludique. Le crate E001 racine et ses tests sont indépendants du rendu GPE.
+
 ## Sources et limites
 
 - [Protocole E001](docs/experiments/E001-minimal-claim-divergence.md)

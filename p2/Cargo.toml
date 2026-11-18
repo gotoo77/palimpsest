@@ -1,0 +1,13 @@
+[package]
+name = "palimpsest-p2"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.97.1"
+publish = false
+
+[dependencies]
+palimpsest = { path = ".." }
+gotoo-pixel-engine = { git = "https://github.com/gotoo77/gotoo-pixel-engine.git", rev = "8cbceda0c9b0cc55ee5deb7d5e173676ffc1d4f1" }
+
+[profile.dev.package.gotoo-pixel-engine]
+opt-level = 2
