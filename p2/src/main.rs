@@ -99,10 +99,22 @@ fn render(fb: &mut Framebuffer, scene: &Scene) {
     } else {
         "ADA ACCESS: MASKED"
     };
-    label(fb, 336, 233, access, if scene.claim_visible { CYAN } else { RED });
+    label(
+        fb,
+        336,
+        233,
+        access,
+        if scene.claim_visible { CYAN } else { RED },
+    );
 
     panel(fb, 18, 266, 604, 77);
-    label(fb, 29, 275, "M ACCESS   E INSPECT   C PREDICT HELP   F PREDICT REFUSE", TEXT);
+    label(
+        fb,
+        29,
+        275,
+        "M ACCESS   E INSPECT   C PREDICT HELP   F PREDICT REFUSE",
+        TEXT,
+    );
 
     if let Some(trace) = &scene.result {
         let outcome = match trace.chosen_action {
@@ -123,7 +135,13 @@ fn render(fb: &mut Framebuffer, scene: &Scene) {
             scene.causal_summary().unwrap_or("NO CAUSAL TRACE"),
             MUTED,
         );
-        label(fb, 29, 328, "R RESET FOR ANOTHER EXPERIMENT  /  ESC QUIT", TEXT);
+        label(
+            fb,
+            29,
+            328,
+            "R RESET FOR ANOTHER EXPERIMENT  /  ESC QUIT",
+            TEXT,
+        );
     } else {
         let prediction = match scene.prediction {
             None => "PREDICTION: CHOOSE C OR F",
@@ -132,7 +150,13 @@ fn render(fb: &mut Framebuffer, scene: &Scene) {
         };
         label(fb, 29, 292, prediction, AMBER);
         label(fb, 29, 311, "ENTER REVEAL (AFTER PREDICTION)", CYAN);
-        label(fb, 29, 328, "OBSERVER SEES MORE THAN ADA  /  R RESET  /  ESC QUIT", MUTED);
+        label(
+            fb,
+            29,
+            328,
+            "OBSERVER SEES MORE THAN ADA  /  R RESET  /  ESC QUIT",
+            MUTED,
+        );
     }
 }
 
