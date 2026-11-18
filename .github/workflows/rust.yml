@@ -2,7 +2,7 @@ name: Rust E001
 
 on:
   push:
-    branches: [main, feat/e001-rust-minimal-probe]
+    branches: [main]
   pull_request:
 
 jobs:
