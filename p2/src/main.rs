@@ -1,9 +1,11 @@
+mod i18n;
 mod scene;
 
 use gotoo_pixel_engine::{
     EngineConfig, EngineError, Frame, Framebuffer, Game, GameResult, Key, Pixel, TextRenderer, run,
 };
-use palimpsest::Action;
+use i18n::Language;
+use palimpsest::{Action, ReasonKind};
 use scene::{Command, Scene};
 
 const WIDTH: u32 = 640;
@@ -21,12 +23,16 @@ const RED: Pixel = Pixel::rgb(242, 127, 126);
 
 struct PalimpsestGame {
     scene: Scene,
+    language: Language,
 }
 
 impl Game for PalimpsestGame {
     fn update(&mut self, frame: &mut Frame<'_>) -> GameResult {
         if frame.input.key(Key::Escape).pressed() {
             return GameResult::Exit;
+        }
+        if frame.input.key(Key::L).pressed() {
+            self.language = self.language.toggle();
         }
         let next = [
             (Key::R, Command::Reset),
@@ -46,7 +52,7 @@ impl Game for PalimpsestGame {
                 .expect("the built-in E001 experiment must remain valid");
         }
 
-        render(frame.framebuffer, &self.scene);
+        render(frame.framebuffer, &self.scene, self.language);
         GameResult::Continue
     }
 }
@@ -69,35 +75,39 @@ fn person(fb: &mut Framebuffer, x: i32, name: &str, role: &str, color: Pixel) {
     label(fb, x + 50, y + 33, role, MUTED);
 }
 
-fn render(fb: &mut Framebuffer, scene: &Scene) {
+fn render(fb: &mut Framebuffer, scene: &Scene, language: Language) {
+    let ui = language.copy();
+
     fb.clear(BACKGROUND);
     fb.fill_rect(0, 0, WIDTH, 48, Pixel::rgb(7, 15, 25));
     fb.fill_rect(0, 46, WIDTH, 2, CYAN);
     label(fb, 18, 12, "PALIMPSEST  /  E001", CYAN);
-    label(fb, 18, 29, "ONE MEMORY. TWO POSSIBLE DECISIONS.", TEXT);
+    label(fb, 539, 12, ui.language_hint, MUTED);
+    label(fb, 18, 29, ui.subtitle, TEXT);
 
-    person(fb, 18, "ADA", "DECIDES", CYAN);
-    person(fb, 231, "BORIN", "ASKS FOR HELP", AMBER);
-    person(fb, 444, "CIRO", "CLAIM AUTHOR", PURPLE);
+    person(fb, 18, "ADA", ui.ada_role, CYAN);
+    person(fb, 231, "BORIN", ui.borin_role, AMBER);
+    person(fb, 444, "CIRO", ui.ciro_role, PURPLE);
 
     panel(fb, 18, 165, 294, 91);
-    label(fb, 29, 175, "EVENT RECORD  /  OBSERVER", CYAN);
-    label(fb, 29, 194, "BORIN TOOK RESOURCE R1.", TEXT);
-    label(fb, 29, 207, "R1 HAD BEEN PROMISED TO ADA.", TEXT);
-    label(fb, 29, 233, "ADA CANNOT READ THIS RECORD.", MUTED);
+    label(fb, 29, 175, ui.record_title, CYAN);
+    label(fb, 29, 194, ui.past_event, TEXT);
+    label(fb, 29, 207, ui.past_context, TEXT);
+    label(fb, 29, 233, ui.record_limit, MUTED);
 
     panel(fb, 325, 165, 297, 91);
-    label(fb, 336, 175, "CIRO'S CLAIM  /  INTERPRETATION", PURPLE);
+    label(fb, 336, 175, ui.claim_title, PURPLE);
     if scene.inspected {
-        label(fb, 336, 194, "CIRO ALLEGES A BROKEN PROMISE.", TEXT);
-        label(fb, 336, 207, "ALLEGATION IS NOT A VERIFIED FACT.", MUTED);
+        label(fb, 336, 194, ui.claim_line1, TEXT);
+        label(fb, 336, 207, ui.claim_line2, MUTED);
     } else {
-        label(fb, 336, 194, "PRESS E TO INSPECT THE CLAIM.", TEXT);
+        label(fb, 336, 194, ui.inspect_prompt, TEXT);
+        label(fb, 336, 207, ui.inspect_explainer, MUTED);
     }
     let access = if scene.claim_visible {
-        "ADA ACCESS: VISIBLE"
+        ui.access_visible
     } else {
-        "ADA ACCESS: MASKED"
+        ui.access_masked
     };
     label(
         fb,
@@ -108,55 +118,35 @@ fn render(fb: &mut Framebuffer, scene: &Scene) {
     );
 
     panel(fb, 18, 266, 604, 77);
-    label(
-        fb,
-        29,
-        275,
-        "M ACCESS   E INSPECT   C PREDICT HELP   F PREDICT REFUSE",
-        TEXT,
-    );
+    label(fb, 29, 275, ui.controls, TEXT);
 
     if let Some(trace) = &scene.result {
         let outcome = match trace.chosen_action {
-            Action::Cooperate => "ADA: COOPERATE",
-            Action::Refuse => "ADA: REFUSE",
+            Action::Cooperate => ui.result_help,
+            Action::Refuse => ui.result_refuse,
         };
         let verdict = if scene.predicted_correctly() == Some(true) {
-            "PREDICTION MATCHED"
+            ui.prediction_right
         } else {
-            "PREDICTION MISSED"
+            ui.prediction_wrong
         };
         label(fb, 29, 290, outcome, CYAN);
         label(fb, 180, 290, verdict, AMBER);
-        label(
-            fb,
-            29,
-            305,
-            scene.causal_summary().unwrap_or("NO CAUSAL TRACE"),
-            MUTED,
-        );
-        label(
-            fb,
-            29,
-            328,
-            "R RESET FOR ANOTHER EXPERIMENT  /  ESC QUIT",
-            TEXT,
-        );
+        let explanation = match trace.selected_reason.kind {
+            ReasonKind::BaselineCooperation => ui.reason_baseline,
+            ReasonKind::ReportedPriorPromiseViolation => ui.reason_claim,
+        };
+        label(fb, 29, 305, explanation, MUTED);
+        label(fb, 29, 328, ui.footer_after, TEXT);
     } else {
         let prediction = match scene.prediction {
-            None => "PREDICTION: CHOOSE C OR F",
-            Some(Action::Cooperate) => "PREDICTION: ADA WILL COOPERATE",
-            Some(Action::Refuse) => "PREDICTION: ADA WILL REFUSE",
+            None => ui.predict_prompt,
+            Some(Action::Cooperate) => ui.predict_help,
+            Some(Action::Refuse) => ui.predict_refuse,
         };
         label(fb, 29, 292, prediction, AMBER);
-        label(fb, 29, 311, "ENTER REVEAL (AFTER PREDICTION)", CYAN);
-        label(
-            fb,
-            29,
-            328,
-            "OBSERVER SEES MORE THAN ADA  /  R RESET  /  ESC QUIT",
-            MUTED,
-        );
+        label(fb, 29, 311, ui.reveal_prompt, CYAN);
+        label(fb, 29, 328, ui.footer_before, MUTED);
     }
 }
 
@@ -169,7 +159,7 @@ fn main() -> Result<(), EngineError> {
     };
     run(
         EngineConfig {
-            title: "PALIMPSEST / E001 Causal Scene".into(),
+            title: "PALIMPSEST / E001".into(),
             framebuffer_width: WIDTH,
             framebuffer_height: HEIGHT,
             window_width,
@@ -177,6 +167,7 @@ fn main() -> Result<(), EngineError> {
         },
         PalimpsestGame {
             scene: Scene::default(),
+            language: Language::default(),
         },
     )
 }

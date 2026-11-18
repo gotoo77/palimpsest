@@ -1,4 +1,4 @@
-use palimpsest::{Action, DecisionTrace, ExperimentError, ReasonKind, decide, fixture};
+use palimpsest::{Action, DecisionTrace, ExperimentError, decide, fixture};
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum Command {
@@ -65,15 +65,6 @@ impl Scene {
         Some(self.prediction? == self.result.as_ref()?.chosen_action)
     }
 
-    pub fn causal_summary(&self) -> Option<&'static str> {
-        let trace = self.result.as_ref()?;
-        match trace.selected_reason.kind {
-            ReasonKind::BaselineCooperation => Some("NO CLAIM CONSULTED: BASELINE COOPERATION"),
-            ReasonKind::ReportedPriorPromiseViolation => {
-                Some("CLAIM CONSULTED + APPLICABLE: CAUTION PREVAILS")
-            }
-        }
-    }
 }
 
 #[cfg(test)]

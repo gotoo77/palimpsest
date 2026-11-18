@@ -12,6 +12,18 @@ cargo run --manifest-path p2/Cargo.toml --locked
 
 Sous Linux, GPE peut nécessiter `libasound2-dev`, `libudev-dev` et `pkg-config`. Pour WSLg, une session graphique fonctionnelle est nécessaire.
 
+## Langues
+
+L'interface utilise **le français par défaut**, avec une version anglaise intégrale.
+Appuyer sur **L** pour passer de FR à EN (ou inversement), y compris après avoir révélé la décision.
+Cette préférence concerne uniquement l'affichage : le modèle E001, les données, les règles et les traces ne changent pas de langue. Les textes sont centralisés dans `p2/src/i18n.rs` (pas de framework supplémentaire).
+
+## Comprendre l'expérience
+
+Borin a pris une ressource qui était promise à Ada. Ciro affirme que Borin a rompu une promesse, mais cette **accusation n'est pas une preuve**. Plus tard, Borin demande de l'aide à Ada. Le joueur peut lire le compte rendu de l'événement, qu'Ada ne peut pas consulter, puis décider si le Claim de Ciro est accessible à Ada et prédire la décision d'Ada.
+
+**M** ne réécrit pas le passé : il masque ou révèle seulement le Claim pour Ada. **E** n'a aucun effet sur Ada : c'est uniquement l'inspection du joueur.
+
 ## Commandes
 
 - **E** : inspecter / masquer l'affichage de l'accusation de Ciro (inspection du joueur, indépendante de l'accès d'Ada).
@@ -20,6 +32,7 @@ Sous Linux, GPE peut nécessiter `libasound2-dev`, `libudev-dev` et `pkg-config`
 - **F** : prédire le refus.
 - **Entrée** : révéler la décision et sa raison, après une prédiction.
 - **R** : réinitialiser complètement pour un nouvel essai.
+- **L** : passer du français à l'anglais, sans réinitialiser la scène.
 - **Échap** : quitter.
 
 Le résultat provient de `palimpsest::decide` (P1), **pas de l'interface**. La scène est volontairement fixe et rudimentaire.
