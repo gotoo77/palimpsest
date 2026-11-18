@@ -149,9 +149,13 @@ Le Claim n'embarque **aucune force experimentale**, poids numerique ni action fi
 
 Les identifiants Ada, Borin, Ciro et claim-001 restent des fixtures interchangeables : aucune branche de decision ne doit en dependre.
 
+L'audience initiale du Claim est explicitement `[Ada, Ciro]`. Ce champ fait partie du contenu commun aux runs A et B ; le masque de visibilite de B ne modifie pas l'audience.
+
+**Integrite structurelle avant decision** : `claim.event_reference` doit resoudre vers un evenement existant ; `claim.record_reference` doit resoudre vers un `EventRecord` dont `event_id == claim.event_reference`. Les acteurs, la cible et l'auteur cites doivent exister. Ces validations sont faites par le harnais de fixture, **pas par la perception d'Ada**. Un lien inexistant ou incoherent invalide le run, au lieu de devenir une simple raison de cooperer. En revanche, aucune verification ne compare la veracite de l'allegation au contenu de l'evenement : un Claim attribue mais trompeur demeure possible dans les limites d'E001.
+
 ## Regle d'accessibilite
 
-Un Claim est accessible a une entite si et seulement si l'artefact existe, si l'entite appartient a son audience, et si aucun masque d'acces ne lui interdit la consultation.
+Un Claim est accessible a une entite si et seulement si l'artefact existe, si l'entite appartient a son audience explicite, et si aucun masque d'acces ne lui interdit la consultation. Un override de visibilite ne peut jamais accorder l'acces a une entite hors audience.
 
 **La portee semantique et la cible ne participent pas a l'accessibilite** : elles sont verifiees ensuite, a l'etape d'applicabilite.
 
@@ -174,7 +178,7 @@ Aucun `EventRecord` n'est consultable par Ada dans E001. La politique d'attentio
 
 ## Mecanisme minimal d'interpretation
 
-**Meme regle generale pour tous les runs et tous les controles**, fixee avant d'observer les resultats :
+**Meme regle generale pour tous les runs et tous les controles**, fixee avant d'observer les resultats. E001 limite son domaine de validite aux decisions avec `help_cost = low` et `prior_relation = neutral` : toute autre configuration doit etre declaree hors protocole, sans choix de secours implicite :
 
 1. Si `help_cost == low` et `prior_relation == neutral`, creer la raison positive `baseline_cooperation_when_cost_low_and_relation_neutral` (action candidate `cooperate`, sans Claim).
 2. Pour chaque Claim effectivement consulte, tracer separement les checks :
@@ -275,7 +279,7 @@ Ces traces YAML sont des **oracles attendus**, jamais des observations d'executi
 
 Seed, entites et identifiants, evenement passe, EventRecord, contenu du Claim, contexte de decision, cout `low`, relation `neutral`, demande de cooperation, regles d'accessibilite hors override, consultation, applicabilite, resolution des raisons, ordre d'iteration et absence d'alea non controle.
 
-Une future implementation doit comparer une empreinte canonique des etats initiaux **hors override de visibilite** et prouver qu'aucun autre champ ne varie. Toute mutation cachee invalide la comparaison.
+Une future implementation doit comparer une empreinte canonique des etats initiaux **hors override de visibilite** et prouver qu'aucun autre champ ne varie. Toute mutation cachee invalide la comparaison. Le comparateur d'empreinte doit inclure le contenu du Claim, son audience et ses references de provenance ; seule la valeur `visible` pour Ada peut changer entre A et B.
 
 ## Variable independante
 
@@ -376,6 +380,9 @@ E001 teste seulement une causalite minimale entre accessibilite d'un claim et de
 
 ```text
 base_world = fixture_E001()                 # EventRecord et Claim toujours presents
+assert valid_references(base_world)          # harnais : reference event/record, sans audit de verite
+assert base_world.decision.help_cost == low
+assert base_world.decision.prior_relation == neutral
 for visible in [true, false]:
     world = copy(base_world)
     world.visibility.set(world.decision.actor, claim_id, visible)
@@ -424,6 +431,7 @@ event_records:
 claims:
   - id: claim-001
     author: Ciro
+    audience: [Ada, Ciro]
     target: Borin
     event_reference: event-001
     record_reference: record-001
@@ -455,12 +463,18 @@ Les noms ne sont que des fixtures. Un Claim inexact resterait une interpretation
 6. **Negatif 1, Claim hors cible** : target different du partenaire => cooperation, check `target_matches=false`.
 7. **Negatif 2, Claim hors portee** : scope different de cooperation => consultation effective, check `scope_matches=false`, cooperation.
 8. **Negatif 3, EventRecord seul** : record present mais Claim masque => cooperation, aucune influence du record.
-9. **Negatif 4, mauvaise audience** : Claim accessible a Ciro mais pas Ada => aucune consultation d'Ada, cooperation.
+9. **Negatif 4, mauvaise audience** : variante controlee avec `audience: [Ciro]` sans autre changement de regle ; le Claim est inaccessible a Ada, meme si aucun masque ne lui est applique => aucune consultation d'Ada, cooperation.
 10. Permuter acteurs, ressources et IDs d'artefacts en maintenant les references coherentes : comportements inchanges.
 11. Modifier uniquement le texte libre du Claim ne modifie pas le comportement.
 12. La trace est collectee en cours de decision, pas produite selon le seul `chosen_action`.
+13. References de provenance absentes ou incoherentes => fixture invalide, sans consultation ni decision ; une allegation factuellement douteuse mais structurellement valide n'est pas rejetee par un test de verite.
+14. Une demande hors `help_cost = low` et `prior_relation = neutral` est rejetee comme hors domaine E001, pas traitee par une raison par defaut arbitraire.
 
 Tous les controles emploient les **memes regles** que le controle positif.
+
+## Limite supplementaire : artefact precharge
+
+E001 precharge `EventRecord` et `Claim` dans l'etat initial. Elle **ne demontre pas** leur production dynamique, leur transmission, leur survie a une sauvegarde, ni leur accumulation sur plusieurs pas de simulation. Ce ne sont pas des prerequis de ce protocole borne ; ils devront etre testes separement si le projet poursuit la boucle de memoire persistante.
 
 ## Gate P0 - autorisation d'implementation
 

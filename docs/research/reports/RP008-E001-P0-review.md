@@ -32,6 +32,20 @@
 - Aucun code, runtime, test simule ou dependance.
 - Checks de whitespace et de structure documentaire, puis revue humaine des hypotheses.
 
+## Second passage contradictoire du 18 novembre 2026
+
+Deux ambiguities ont ete trouvees dans la PR initiale puis corrigees :
+
+- **Audience du Claim absente des fixtures** : audience de base explicite `[Ada, Ciro]` ; le masque ne peut pas contourner l'audience. Le controle negatif de mauvaise audience varie maintenant ce champ.
+- **Provenance purement decorative** : validation prealable des liens `Claim -> EventRecord -> Event` et de la resolution des identifiants, sans verification de la verite de l'allegation ni lecture du record par Ada.
+
+Deux garde-fous supplementaires :
+
+- Domaine de decision E001 limite a cout faible et relation neutre ; pas de resolution non specifiee hors du domaine.
+- Les artefacts et evenements sont **precharges** : aucune preuve de generation, de transmission ou de persistance entre sessions ne sera revendiquee.
+
+Ces corrections ne changent pas H001, H006, le nombre de controles negatifs principaux, ni le perimetre de l'experience.
+
 ## Verdict
 
-**REVISE : gate P0 encore ouverte.** Le protocole parait mieux defini, mais les controles conceptuels doivent etre relus independamment. Aucune preuve de H001 n'est produite. Meme un futur GO de P0 autorisera uniquement une micro-implementation, pas le choix automatique de Rust, l'integration GPE ou la validation ludique.
+**Pret pour revue humaine de P0, gate encore ouverte.** La revue documentaire n'identifie plus de lacune bloquante connue apres les corrections du second passage, mais elle n'est pas un avis independant ni une validation du comportement executable. Aucune preuve de H001 n'est produite. Meme un futur GO de P0 autorisera uniquement une micro-implementation, pas le choix automatique de Rust, l'integration GPE ou la validation ludique.
