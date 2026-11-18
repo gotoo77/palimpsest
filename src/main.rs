@@ -10,7 +10,10 @@ fn main() -> ExitCode {
 
     match compare() {
         Ok(result) => {
-            println!("E001 - same initial world except claim visibility: {}", result.world_equal_except_mask);
+            println!(
+                "E001 - same initial world except claim visibility: {}",
+                result.world_equal_except_mask
+            );
             println!("Visible Claim: {:#?}", result.visible);
             println!("Masked Claim: {:#?}", result.masked);
             ExitCode::SUCCESS

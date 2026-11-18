@@ -172,7 +172,9 @@ pub fn validate_fixture(world: &World) -> Result<(), ExperimentError> {
         || world.event.resource.is_empty()
         || world.claim.allegation.resource.is_empty()
     {
-        return Err(ExperimentError::InvalidFixture("empty artifact or resource ID"));
+        return Err(ExperimentError::InvalidFixture(
+            "empty artifact or resource ID",
+        ));
     }
 
     for id in [
@@ -197,7 +199,9 @@ pub fn validate_fixture(world: &World) -> Result<(), ExperimentError> {
         .chain(world.claim_hidden_from.iter())
         .any(|id| !is_member(&world.entities, id))
     {
-        return Err(ExperimentError::InvalidFixture("unknown audience or mask entity"));
+        return Err(ExperimentError::InvalidFixture(
+            "unknown audience or mask entity",
+        ));
     }
 
     if world.record.event_id != world.event.id
@@ -228,9 +232,7 @@ pub fn decide(world: &World) -> Result<DecisionTrace, ExperimentError> {
 
     let actor = &world.decision.actor;
     let mut accessible_artifact_ids = Vec::new();
-    if is_member(&world.claim.audience, actor)
-        && !is_member(&world.claim_hidden_from, actor)
-    {
+    if is_member(&world.claim.audience, actor) && !is_member(&world.claim_hidden_from, actor) {
         accessible_artifact_ids.push(world.claim.id.clone());
     }
 
@@ -416,7 +418,10 @@ mod tests {
             result.visible.selected_reason.kind,
             ReasonKind::ReportedPriorPromiseViolation
         );
-        assert_eq!(result.masked.selected_reason.kind, ReasonKind::BaselineCooperation);
+        assert_eq!(
+            result.masked.selected_reason.kind,
+            ReasonKind::BaselineCooperation
+        );
         for trace in [&result.visible, &result.masked] {
             check_trace(trace);
         }
@@ -497,7 +502,10 @@ mod tests {
         world.decision.partner = "Y".into();
         let trace = decide(&world).unwrap();
         assert_eq!(trace.chosen_action, Action::Refuse);
-        assert_eq!(trace.selected_reason.source_claim.as_deref(), Some("opinion"));
+        assert_eq!(
+            trace.selected_reason.source_claim.as_deref(),
+            Some("opinion")
+        );
         check_trace(&trace);
     }
 
@@ -536,10 +544,16 @@ mod tests {
     fn nonneutral_or_high_cost_cases_are_out_of_scope() {
         let mut world = fixture();
         world.decision.help_cost = HelpCost::High;
-        assert!(matches!(decide(&world), Err(ExperimentError::OutOfScope(_))));
+        assert!(matches!(
+            decide(&world),
+            Err(ExperimentError::OutOfScope(_))
+        ));
         world.decision.help_cost = HelpCost::Low;
         world.decision.prior_relation = Relation::Other;
-        assert!(matches!(decide(&world), Err(ExperimentError::OutOfScope(_))));
+        assert!(matches!(
+            decide(&world),
+            Err(ExperimentError::OutOfScope(_))
+        ));
     }
 
     #[test]
